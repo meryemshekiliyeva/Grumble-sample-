@@ -9,6 +9,8 @@ import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import NewComplaint from './pages/NewComplaint';
 import Login from './pages/Login';
+import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="terms" element={<Terms />} />
           <Route path="new-complaint" element={<NewComplaint />} />
           <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
         </Route>
       </Routes>
     </BrowserRouter>

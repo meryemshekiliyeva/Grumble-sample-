@@ -4,10 +4,10 @@ const Terms = () => {
   return (
     <div className="container max-w-screen-2xl py-8">
       <h1 className="text-3xl font-bold tracking-tight text-center">
-        Terms of Service
+        İstifadə Şərtləri
       </h1>
       <p className="text-center text-muted-foreground mt-2">
-        This page will contain the terms of service.
+        Bu səhifədə istifadə şərtləri olacaq.
       </p>
     </div>
   );

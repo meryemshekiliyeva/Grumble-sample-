@@ -1,23 +1,28 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+const Register = () => {
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
     email: '',
-    password: ''
+    password: '',
+    confirmPassword: '',
+    agreeToTerms: false
   });
 
   const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: type === 'checkbox' ? checked : value
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login attempt:', formData);
+    // Handle registration logic here
+    console.log('Registration attempt:', formData);
   };
 
   return (
@@ -38,16 +43,51 @@ const Login = () => {
             </div>
           </div>
           <h2 className="text-3xl font-black text-gray-900 az-text">
-            Grumble-a Giriş
+            Grumble-a Qoşulun
           </h2>
           <p className="mt-2 text-sm text-gray-600 az-text">
-            Şikayətlərinizi bildirmək və həll yollarını tapmaq üçün daxil olun
+            Şikayətlərinizi bildirin və problemlərinizə həll tapın
           </p>
         </div>
 
         {/* Form */}
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8">
           <form className="space-y-6" onSubmit={handleSubmit}>
+            {/* Name Fields */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="firstName" className="block text-sm font-semibold text-gray-700 mb-2 az-text">
+                  Ad
+                </label>
+                <input
+                  id="firstName"
+                  name="firstName"
+                  type="text"
+                  required
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm az-text"
+                  placeholder="Adınız"
+                />
+              </div>
+              <div>
+                <label htmlFor="lastName" className="block text-sm font-semibold text-gray-700 mb-2 az-text">
+                  Soyad
+                </label>
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="text"
+                  required
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm az-text"
+                  placeholder="Soyadınız"
+                />
+              </div>
+            </div>
+
+            {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2 az-text">
                 E-poçt Ünvanı
@@ -65,6 +105,7 @@ const Login = () => {
               />
             </div>
 
+            {/* Password */}
             <div>
               <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2 az-text">
                 Şifrə
@@ -73,7 +114,7 @@ const Login = () => {
                 id="password"
                 name="password"
                 type="password"
-                autoComplete="current-password"
+                autoComplete="new-password"
                 required
                 value={formData.password}
                 onChange={handleChange}
@@ -82,36 +123,54 @@ const Login = () => {
               />
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 az-text">
-                  Məni xatırla
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <Link to="/forgot-password" className="font-medium text-blue-600 hover:text-blue-500 az-text">
-                  Şifrəni unutmusunuz?
-                </Link>
-              </div>
+            {/* Confirm Password */}
+            <div>
+              <label htmlFor="confirmPassword" className="block text-sm font-semibold text-gray-700 mb-2 az-text">
+                Şifrəni Təsdiqləyin
+              </label>
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                autoComplete="new-password"
+                required
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm az-text"
+                placeholder="••••••••"
+              />
             </div>
 
+            {/* Terms Agreement */}
+            <div className="flex items-center">
+              <input
+                id="agreeToTerms"
+                name="agreeToTerms"
+                type="checkbox"
+                required
+                checked={formData.agreeToTerms}
+                onChange={handleChange}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <label htmlFor="agreeToTerms" className="ml-2 block text-sm text-gray-700 az-text">
+                <Link to="/terms" className="text-blue-600 hover:text-blue-500">İstifadə Şərtləri</Link>
+                {' '}və{' '}
+                <Link to="/privacy" className="text-blue-600 hover:text-blue-500">Məxfilik Siyasəti</Link>
+                ni qəbul edirəm
+              </label>
+            </div>
+
+            {/* Submit Button */}
             <div>
               <button
                 type="submit"
                 className="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 az-text"
               >
-                Daxil Ol
+                Hesab Yaradın
               </button>
             </div>
 
-            {/* Social Login */}
+            {/* Social Registration */}
             <div className="mt-6">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
@@ -149,30 +208,50 @@ const Login = () => {
             </div>
           </form>
 
-          {/* Sign up link */}
+          {/* Login link */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600 az-text">
-              Hesabınız yoxdur?{' '}
-              <Link to="/register" className="font-semibold text-blue-600 hover:text-blue-500 az-text">
-                Qeydiyyatdan keçin
+              Artıq hesabınız var?{' '}
+              <Link to="/login" className="font-semibold text-blue-600 hover:text-blue-500 az-text">
+                Daxil olun
               </Link>
             </p>
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="text-center">
-          <p className="text-xs text-gray-500 az-text">
-            Daxil olmaqla{' '}
-            <Link to="/terms" className="text-blue-600 hover:text-blue-500">İstifadə Şərtləri</Link>
-            {' '}və{' '}
-            <Link to="/privacy" className="text-blue-600 hover:text-blue-500">Məxfilik Siyasəti</Link>
-            ni qəbul etmiş olursunuz.
-          </p>
+        {/* Benefits */}
+        <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+          <h3 className="text-lg font-bold text-gray-900 mb-4 az-text">Grumble-a qoşulmaqla:</h3>
+          <ul className="space-y-2 text-sm text-gray-600">
+            <li className="flex items-center az-text">
+              <svg className="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Şikayətlərinizi pulsuz bildirin
+            </li>
+            <li className="flex items-center az-text">
+              <svg className="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Sürətli həll yolları tapın
+            </li>
+            <li className="flex items-center az-text">
+              <svg className="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Şirkətlərlə birbaşa əlaqə qurun
+            </li>
+            <li className="flex items-center az-text">
+              <svg className="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Digər istifadəçilərin təcrübələrindən faydalanın
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;

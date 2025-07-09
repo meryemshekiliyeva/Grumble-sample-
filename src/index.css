@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Import Google Fonts for better Azerbaijani character support */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap');
+
 :root {
   --background: #f9f9f9;
   --foreground: #333333;
@@ -33,9 +36,9 @@
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #d4d4d4;
   --sidebar-ring: #6c5ce7;
-  --font-sans: Montserrat, sans-serif;
-  --font-serif: Playfair Display, serif;
-  --font-mono: Source Code Pro, monospace;
+  --font-sans: 'Inter', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Arial', 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+  --font-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
   --radius: 0.5rem;
   --shadow-2xs: 0px 5px 10px -2px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0px 5px 10px -2px hsl(0 0% 0% / 0.05);
@@ -82,9 +85,9 @@
   --sidebar-accent-foreground: #e5e5e5;
   --sidebar-border: #444444;
   --sidebar-ring: #6c5ce7;
-  --font-sans: Montserrat, sans-serif;
-  --font-serif: Playfair Display, serif;
-  --font-mono: Source Code Pro, monospace;
+  --font-sans: 'Inter', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Arial', 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+  --font-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
   --radius: 0.5rem;
   --shadow-2xs: 0px 5px 10px -2px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0px 5px 10px -2px hsl(0 0% 0% / 0.05);
@@ -147,4 +150,129 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
+}
+
+/* Animated scrolling categories */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 25s linear infinite;
+}
+
+.animate-scroll-right {
+  animation: scroll-right 25s linear infinite;
+}
+
+.animate-scroll-left:hover,
+.animate-scroll-right:hover {
+  animation-play-state: paused;
+}
+
+/* Custom gradient backgrounds */
+.bg-gradient-to-br {
+  background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
+}
+
+/* Enhanced container spacing */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive padding adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* Azerbaijani character support */
+body, html {
+  font-family: 'Inter', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Arial', 'Noto Sans', sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Specific styling for Azerbaijani characters */
+.az-text {
+  font-family: 'Inter', 'Roboto', 'Segoe UI', system-ui, sans-serif;
+  font-variant-ligatures: common-ligatures;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ensure proper rendering of ə character */
+h1, h2, h3, h4, h5, h6, p, span, div {
+  font-family: 'Inter', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Arial', sans-serif;
+  font-feature-settings: "kern" 1;
+}
+
+/* Fix for gradient text with Azerbaijani characters */
+.bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-family: 'Inter', 'Roboto', 'Segoe UI', sans-serif;
+}
+
+/* Category card hover effects */
+.category-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 0.5px solid #e5e7eb !important;
+}
+
+.category-card:hover {
+  border: 0.5px solid #9ca3af !important;
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Special hover effect for the center card */
+.category-card.center-card {
+  border: 2px solid #374151 !important;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.category-card.center-card:hover {
+  border: 2px solid #1f2937 !important;
+  box-shadow: 0 20px 40px -4px rgba(0, 0, 0, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* Thin border utilities */
+.border-thin {
+  border-width: 0.5px;
+}
+
+.border-gray-light {
+  border-color: #f3f4f6;
+}
+
+.hover\:border-gray-medium:hover {
+  border-color: #d1d5db;
 }
