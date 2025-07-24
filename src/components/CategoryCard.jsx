@@ -1,12 +1,13 @@
 import React from 'react';
 
-const CategoryCard = ({ name, description, icon, bgColor, isCenter = false }) => {
+const CategoryCard = ({ name, description, icon, bgColor }) => {
   return (
     <div className="flex-shrink-0 w-44 mx-2">
       <div
-        className={`group bg-white rounded-2xl transition-all duration-300 cursor-pointer category-card ${isCenter ? 'center-card' : ''}`}
+        className={`group bg-white rounded-2xl transition-all duration-300 cursor-pointer category-card`}
         style={{
-          border: isCenter ? '2px solid #374151' : '0.5px solid #e5e7eb'
+          border: '1px solid #e5e7eb', // Use a thin, light gray border
+          boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
         }}
       >
         <div className="p-6 text-center">
